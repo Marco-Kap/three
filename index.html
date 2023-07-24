@@ -65,6 +65,12 @@
       dodecahedron.position.x = 25;
       scene.add(dodecahedron);
 
+      const obstacles = new THREE.BoxGeometry(2, 3, 2);
+      const obstaclesMaterial = new THREE.MeshPhongMaterial({
+        color: 0xff332d,
+      });
+      const obstacle = new THREE.Mesh(obstacles, obstaclesMaterial);
+      scene.add(obstacle);
       //adds light to the scene
       const light = new THREE.PointLight(0xffffff);
       light.position.set(-10, 15, 50);
