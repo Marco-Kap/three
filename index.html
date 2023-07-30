@@ -1,93 +1,15 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Three.js Spielplatz</title>
+    <title>Spielewiese</title>
     <style>
       body {
         margin: 0;
-        padding: 0;
-      }
-      canvas {
-        width: 100%;
-        height: 100%;
       }
     </style>
   </head>
   <body>
-    <script src="three.min.js" ;></script>
-    <script>
-      //https://threejs.org/docs/
-
-      //https://developer.mozilla.org/en-US/docs/Games/Techniques/3D_on_the_web
-      const WIDTH = window.innerWidth;
-      const HEIGHT = window.innerHeight;
-
-      const renderer = new THREE.WebGLRenderer({ antialias: true });
-      renderer.setSize(WIDTH, HEIGHT);
-      renderer.setClearColor(0xdddddd, 1);
-      document.body.appendChild(renderer.domElement);
-
-      // the scene object is where it is displayed
-      const scene = new THREE.Scene();
-      //the default values for camara x,y,z position are 0
-      const camera = new THREE.PerspectiveCamera(70, WIDTH / HEIGHT);
-      camera.position.z = 50;
-
-      scene.add(camera);
-
-      //physical object in this case a box that is visible
-      const boxGeometry = new THREE.BoxGeometry(20, 10, 10);
-      //Material: texture,style of the object
-      const basicMaterial = new THREE.MeshBasicMaterial({ color: 0x0095dd });
-      //a Mesh applies Material as specified to the rendered object
-      const cube = new THREE.Mesh(boxGeometry, basicMaterial);
-
-      scene.add(cube);
-      cube.rotation.set(0.2, 1, 0);
-      cube.position.x = -25;
-
-      //same procedure for a torus
-      const torusGeometry = new THREE.TorusGeometry(7, 1, 6, 12);
-      const phongMaterial = new THREE.MeshPhongMaterial({ color: 0xff9500 });
-      const torus = new THREE.Mesh(torusGeometry, phongMaterial);
-      scene.add(torus);
-
-      //and same procedure for a dodecahedron
-      const dodecahedronGeometry = new THREE.DodecahedronGeometry(7);
-      const lambertMaterial = new THREE.MeshLambertMaterial({
-        color: 0xeaeff2,
-      });
-      const dodecahedron = new THREE.Mesh(
-        dodecahedronGeometry,
-        lambertMaterial
-      );
-      dodecahedron.position.x = 25;
-      scene.add(dodecahedron);
-
-      const obstacles = new THREE.BoxGeometry(2, 3, 2);
-      const obstaclesMaterial = new THREE.MeshPhongMaterial({
-        color: 0xff332d,
-      });
-      const obstacle = new THREE.Mesh(obstacles, obstaclesMaterial);
-      scene.add(obstacle);
-      //adds light to the scene
-      const light = new THREE.PointLight(0xffffff);
-      light.position.set(-10, 15, 50);
-      scene.add(light);
-
-      let t = 0;
-      //this is where the magic happens requestAnimationFrame() is called on a loop
-      //call this function after all the objects are initialized
-      function render() {
-        requestAnimationFrame(render);
-        renderer.render(scene, camera);
-        cube.rotation.y += 0.01;
-        dodecahedron.position.y = -7 * Math.sin(t * 2);
-        t += 0.01;
-        torus.scale.y = Math.abs(Math.sin(t));
-      }
-      render();
-    </script>
+    <script type="module" src="/game.ts"></script>
   </body>
 </html>
