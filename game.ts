@@ -16,6 +16,13 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(70, WIDTH / HEIGHT);
 camera.position.z = 50;
 
+const obstableGeometry = new THREE.CylinderGeometry(0.1, 2, 20);
+const cylenderMesh = new THREE.MeshLambertMaterial({ color: 0xd3d3d3 });
+const obstacles = new THREE.Mesh(obstableGeometry, cylenderMesh);
+obstacles.rotation.set(0.5, 4, 1);
+
+scene.add(obstacles);
+
 scene.background = new THREE.Color(0x1c28cc);
 scene.add(camera);
 
@@ -43,7 +50,7 @@ const lambertMaterial = new THREE.MeshLambertMaterial({
   color: 0x80f0,
 });
 const dodecahedron = new THREE.Mesh(dodecahedronGeometry, lambertMaterial);
-dodecahedron.position.x = 0;
+
 dodecahedron.castShadow;
 scene.add(dodecahedron);
 
@@ -61,32 +68,37 @@ function controls() {
   addEventListener("keydown", (e) => {
     switch (e.code) {
       case "ArrowDown":
-        dodecahedron.position.y = dodecahedron.position.y - 0.008;
+        dodecahedron.position.y = dodecahedron.position.y - 0.001;
         break;
       case "ArrowUp":
-        dodecahedron.position.y = dodecahedron.position.y + 0.008;
+        dodecahedron.position.y = dodecahedron.position.y + 0.001;
         break;
       case "ArrowLeft":
-        dodecahedron.position.x = dodecahedron.position.x - 0.008;
+        dodecahedron.position.x = dodecahedron.position.x - 0.001;
         break;
       case "ArrowRight":
-        dodecahedron.position.x = dodecahedron.position.x + 0.008;
+        dodecahedron.position.x = dodecahedron.position.x + 0.001;
         break;
       default:
         dodecahedron.position.x = dodecahedron.position.x;
     }
-    console.log(e.code);
   });
 }
-
+obstacles.position.z = -200;
 let t = 0;
 //this is where the magic happens requestAnimationFrame() is called on a loop
 //call this function after all the objects are initialized
 function render() {
   requestAnimationFrame(render);
   renderer.render(scene, camera);
+  obstacles.position.z = obstacles.position.z + t;
+  console.log(obstacles.position.z);
 
   controls();
+}
+
+function addObstacles() {
+  obstacles.scene.add(obstable);
 }
 //dodecahedron.position.y = -7 * Math.sin(t * 2);
 t += 0.001;
