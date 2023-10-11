@@ -27,6 +27,15 @@ scene.background = new THREE.Color(0x1c28cc);
 scene.add(camera);
 
 /*
+Dieser Code ist von Medium also modifizieren und vorsichtig anwenden.
+
+const controller = {  87: {pressed: false, func: player1.movePaddleUp},  83: {pressed: false, func: player1.movePaddleDown},  38: {pressed: false, func: player2.movePaddleUp},  40: {pressed: false, func: player2.movePaddleDown},}
+
+document.addEventListener("keydown", (e) => {  if(controller[e.keyCode]){    controller[e.keyCode].pressed = true  }})document.addEventListener("keyup", (e) => {  if(controller[e.keyCode]){    controller[e.keyCode].pressed = false  }})
+
+*/
+
+/*
 //physical object in this case a box that is visible
 const boxGeometry = new THREE.BoxGeometry(20, 10, 10);
 //Material: texture,style of the object
